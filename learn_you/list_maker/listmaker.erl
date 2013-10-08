@@ -18,6 +18,6 @@ add_to_tail_recursive(Item, List) -> add_to_tail_recursive(Item, lists:reverse(L
 add_to_tail_recursive(Item, [], poop) -> lists:reverse(Item);
 
 %% then build the list with the item to add, backwards
-add_to_tail_recursive(Item, List, poop) -> add_to_tail_recursive( flatten([Item |  [ hd(List) | [] ]]), tl(List), poop).
+add_to_tail_recursive(Item, [H|T], poop) -> add_to_tail_recursive( flatten([Item |  [ H | [] ]]), T, poop).
 
 
