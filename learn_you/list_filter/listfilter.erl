@@ -7,5 +7,5 @@ filter_evens(List) -> [ N || N <- List, N rem 2=:=0].
 -spec(filter_odds(list()) -> list()).
 filter_odds(List) -> [ N || N <- List, N rem 2=/=0].
 
--spec(filter_odds(list(), number()) -> list()).
+-spec(filter_factor(list(), number()) -> list()).
 filter_factor(List, Factor) -> [ N || N <- List, N rem Factor=:=0].
