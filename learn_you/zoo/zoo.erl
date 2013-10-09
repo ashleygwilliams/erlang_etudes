@@ -1,5 +1,5 @@
 -module(zoo).
--export([find_mammals/1, find_birds/1, find_by_type/2, find_by_habitat/2]).
+-export([find_mammals/1, find_birds/1, find_by_type/2, find_by_habitat/2, count_type/2, count_habitat/2]).
 
 %% example data structure:
 %% [{elephant, mammal, jungle}, {penguin, bird, antarctic}, {orca, mammal, antarctic},{lion, mammal,jungle}, {parrot,bird,jungle}, {'sea lion', mammal, antarctic}]
@@ -15,3 +15,9 @@ find_by_type(List, MyType) -> [Animal || {Animal, Type, _} <- List, Type =:= MyT
 
 -spec(find_by_habitat(list(), atom()) -> list()).
 find_by_habitat(List, MyHabitat) -> [Animal || {Animal, _, Habitat} <- List, Habitat =:= MyHabitat].
+
+-spec(count_type(list(), atom()) -> number()).
+count_type(List, Type) -> length(find_by_type(List, Type)).
+
+-spec(count_habitat(list(), atom()) -> number()).
+count_habitat(List, Habitat) -> length(find_by_habitat(List, Habitat)).
