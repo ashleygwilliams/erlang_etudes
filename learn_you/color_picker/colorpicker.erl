@@ -1,8 +1,29 @@
 -module(colorpicker).
--export([hex_to_rgba/1]).
--import(hex, [bin_to_hexstr/1,hexstr_to_bin/1]).
+-export([hexstr_to_list/1, list_to_hexstr/1]).
 
-%%-spec(hex_to_rgba(string()) -> list())
-hex_to_rgba(Hex) -> hex_to_rgba(list_to_binary(string:concat("16#",Hex)), 0).
+%% Hex -> RGBA list
+int(C) when $0 =< C, C =< $9 ->
+    C - $0;
+int(C) when $A =< C, C =< $F ->
+    C - $A + 10;
+int(C) when $a =< C, C =< $f ->
+    C - $a + 10.
 
-hex_to_rgba(Hex, 0) -> <<Hex:24>>.
+hexstr_to_list([X,Y|T]) ->
+    [int(X)*16 + int(Y) | hexstr_to_list(T)];
+hexstr_to_list([]) ->
+    [].
+
+%% RGBA list -> Hex
+hex(N) when N < 10 ->
+    $0+N;
+hex(N) when N >= 10, N < 16 ->
+    $a+(N-10).
+
+to_hex(N) when N < 256 ->
+    [hex(N div 16), hex(N rem 16)].
+ 
+list_to_hexstr([]) -> 
+    [];
+list_to_hexstr([H|T]) ->
+    to_hex(H) ++ list_to_hexstr(T).
