@@ -1,7 +1,7 @@
 -module(powers).
 -export([raise/2, nth_root/2]).
 
--spec(nth_root(number(), number()) -> number()).
+-spec(nth_root(number(), integer()) -> number()).
 nth_root(Rad, Root) -> 
   Approx = Rad/2.0,
   nth_root(Rad, Root, Approx).
@@ -20,7 +20,7 @@ nth_root(Rad, Root, Approx) ->
 
 
 
--spec(raise(number(), number()) -> number()).
+-spec(raise(number(), integer()) -> number()).
 raise(_, 0) -> 1;
 raise(Base, 1) -> Base;
 raise(Base, Exp) when Exp > 0 -> raise(Base, Exp, 1);
