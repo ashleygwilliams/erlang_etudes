@@ -13,8 +13,8 @@ nth_root(Rad, Root, Approx) ->
   Next = Approx - F / Fprime,
   Change = abs(Next - Approx),
 
-  case (Change < 1.0e-8) of 
-    true -> Next;
+  case Change < 1.0e-8 of 
+    true -> io:format("-> ~p~n", [Next]);
     false -> nth_root(Rad, Root, Next)
   end.
 
@@ -24,7 +24,7 @@ nth_root(Rad, Root, Approx) ->
 raise(_, 0) -> 1;
 raise(Base, 1) -> Base;
 raise(Base, Exp) when Exp > 0 -> raise(Base, Exp, 1);
-raise(Base, Exp) when Exp < 0 -> 1 / raise(Base, -Exp).
+raise(Base, Exp) when Exp < 0 -> 1.0 / raise(Base, -Exp).
 
 raise(_, 1, Acc) -> Acc;
 raise(Base, Exp, Acc) -> raise(Base, Exp - 1, Acc*Base).
