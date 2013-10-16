@@ -26,5 +26,5 @@ raise(Base, 1) -> Base;
 raise(Base, Exp) when Exp > 0 -> raise(Base, Exp, 1);
 raise(Base, Exp) when Exp < 0 -> 1.0 / raise(Base, -Exp).
 
-raise(_, 1, Acc) -> Acc;
-raise(Base, Exp, Acc) -> raise(Base, Exp - 1, Acc*Base).
+raise(_, 0, Acc) -> Acc;
+raise(Base, Exp, Acc) -> raise(Base, Exp - 1, Base*Acc).
